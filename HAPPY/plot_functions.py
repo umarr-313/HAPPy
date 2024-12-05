@@ -113,10 +113,11 @@ def plot_comparison(img1, title1, img2, title2, scale=None, location=None):
     fig.tight_layout()
 
 
-def plot_hist(arr):
+def plot_hist(arr,title='Image histogram'):
     _, ax = plt.subplots(figsize=(8, 5))
-    histogram = ax.hist(arr[~np.isnan(arr)].flatten(), bins=60, range=(0, 2))
-    ax.set_title('Image Histogram', fontsize=14)
+    arr2 = arr[~np.isnan(arr)].flatten()
+    histogram = ax.hist(arr2[arr2 < 0.99].flatten(), bins=128)
+    ax.set_title(title, fontsize=14)
     ax.set_xlabel('Gray value', fontsize=12)
     ax.set_ylabel('Frequency', fontsize=12)
 
