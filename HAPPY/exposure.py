@@ -297,6 +297,7 @@ def _histogram(image, bins, source_range, normalize):
     """
 
     image = image[~np.isnan(image)].flatten()
+    image = image[image < 0.99] # Remove peak at the end. REMEMBER THAT IT NEEDS TO BE NORMALISED BETWEEN 0 AND 1
     # For integer types, histogramming with bincount is more efficient.
     if np.issubdtype(image.dtype, np.integer):
         bin_centers = bins if isinstance(bins, np.ndarray) else None
